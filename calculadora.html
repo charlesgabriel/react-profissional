@@ -73,7 +73,7 @@
     const Button = (props) => (
       <button
         onClick={() => {
-          props.onNumberClick(props.value);
+          props.onClick(props.value);
         }}
       >
         {props.value}
@@ -98,7 +98,7 @@
               <Button
                 key={value}
                 value={value}
-                onNumberClick={handleNumberClick}
+                onClick={handleNumberClick}
               />
             ))}
           </div>
