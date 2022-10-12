@@ -58,6 +58,15 @@
       cursor: pointer;
       padding: 8px;
     }
+
+    button.span2 {
+      grid-column: span 2;
+    }
+
+    button.primary {
+      background-color: #ffeec2;
+      color: #c49023;
+    }
   </style>
   <title>Calculadora - React Profissional</title>
 </head>
@@ -70,13 +79,14 @@
   <script type="text/babel">
     const Header = () => <div className="header">Calculadora</div>;
 
-    const Button = (props) => (
+    const Button = ({value, onClick, className}) => (
       <button
         onClick={() => {
-          props.onClick(props.value);
+          onClick(value);
         }}
+        className={className}
       >
-        {props.value}
+        {value}
       </button>
     );
       
@@ -99,8 +109,14 @@
                 key={value}
                 value={value}
                 onClick={handleNumberClick}
+                className={value === 0 && "span2"}
               />
             ))}
+            <Button
+                value={"."}
+                onClick={handleNumberClick}
+                className="primary"
+              />
           </div>
         </div>
       );
