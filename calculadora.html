@@ -105,6 +105,12 @@
         0,".","+","=",
       ];
 
+      React.useEffect(() => {
+        if (error) {
+          setError();
+        }
+      }, [display]);
+
       const doTheMath = () => {
         try {
           setDisplay("" + eval(display));
