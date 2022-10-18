@@ -120,11 +120,17 @@
       const [showAd, toggleAd] = React.useState(true);
       const [history, setHistory] = React.useState([]);
       const [showHist, toggleHist] = React.useState(true);
+      const histRef = React.useRef();
       React.useEffect(() => {
         if (error) {
           setError();
         }
       }, [display]);
+      React.useEffect(() => {
+        if(history.length > 2 && showHist) {
+          histRef.current.scrollTop = histRef.current.scrollHeight;
+        }
+      }, [history.length, showHist]);
 
       const doTheMath = () => {
         try {
@@ -191,9 +197,11 @@
       return (
         <div className="calculator">
           {showHist && (
-            <div class="history">
-              {history.map(({calculation, result}) => (
-                <p>{`${calculation} = ${result}`}</p>
+            <div ref={histRef} class="history">
+              {history.map(({calculation, result}, index) => (
+                <p key={index}>
+                  {`${calculation} = ${result}`}
+                </p>
               ))}
             </div>
           )}
